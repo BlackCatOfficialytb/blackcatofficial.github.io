@@ -201,6 +201,76 @@
   <script src="home.js" defer></script>
 </head>
 <body>
+<!-- Add this near the top of <body> in home.html -->
+<div id="domain-redirect-banner" style="position:fixed;top:0;left:0;right:0;z-index:9999;background:#fff3cd;color:#856404;
+  border-bottom:1px solid #ffeeba;padding:10px 16px;display:flex;align-items:center;justify-content:space-between;font-family:system-ui,Arial,sans-serif;">
+  <div style="flex:1;min-width:0;">
+    <strong style="margin-right:8px;">Notice:</strong>
+    This site has moved to <a href="https://blackcatofficial.qzz.io" style="color:#0b5fff;text-decoration:underline;">blackcatofficial.qzz.io</a>.
+    You will be redirected in <span id="redirect-countdown">10</span>s.
+  </div>
+  <div style="margin-left:12px;display:flex;gap:8px;align-items:center;">
+    <a id="redirect-now" href="https://blackcatofficial.qzz.io" style="background:#0b5fff;color:#fff;padding:6px 10px;border-radius:4px;text-decoration:none;">Go now</a>
+    <button id="dismiss-redirect" style="background:transparent;border:1px solid #856404;color:#856404;padding:6px 10px;border-radius:4px;cursor:pointer;">Stay</button>
+  </div>
+</div>
+
+<script>
+(function(){
+  var target = "https://blackcatofficial.qzz.io";
+  // If already on the target host, do nothing
+  if (location.hostname === (new URL(target)).hostname) {
+    var b = document.getElementById('domain-redirect-banner');
+    if (b) b.style.display = 'none';
+    return;
+  }
+
+  var countdownEl = document.getElementById('redirect-countdown');
+  var dismissBtn = document.getElementById('dismiss-redirect');
+  var redirectNow = document.getElementById('redirect-now');
+  var banner = document.getElementById('domain-redirect-banner');
+  var seconds = 10;
+
+  // Safe: update countdown UI
+  function updateUI() {
+    if (countdownEl) countdownEl.textContent = seconds;
+  }
+
+  updateUI();
+  var interval = setInterval(function(){
+    seconds -= 1;
+    updateUI();
+    if (seconds <= 0) {
+      clearInterval(interval);
+      // Preserve path/query/hash while sending to main domain
+      var dest = target + location.pathname + location.search + location.hash;
+      location.replace(dest);
+    }
+  }, 1000);
+
+  // Dismiss button: stop redirect and hide banner
+  if (dismissBtn) dismissBtn.addEventListener('click', function(){
+    clearInterval(interval);
+    if (banner) banner.style.display = 'none';
+  });
+
+  // If user clicks "Go now", allow navigation (link present)
+  if (redirectNow) redirectNow.addEventListener('click', function(){
+    clearInterval(interval);
+  });
+
+  // Accessibility: add a small top offset to body content so banner doesn't overlap
+  var bannerHeight = banner ? banner.offsetHeight : 0;
+  if (bannerHeight) {
+    var prevPaddingTop = document.documentElement.style.paddingTop || '';
+    document.documentElement.style.paddingTop = bannerHeight + 'px';
+    // restore on dismiss
+    if (dismissBtn) dismissBtn.addEventListener('click', function(){
+      document.documentElement.style.paddingTop = prevPaddingTop;
+    });
+  }
+})();
+</script>
 <header class="site-header">
     <div class="page-container header-container">
         <!-- merged image -->
