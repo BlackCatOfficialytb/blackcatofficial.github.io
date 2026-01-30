@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BlackCatOfficial bio</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BlackCatOfficial</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="home.css">
+  <style id="sections-styles">
+/* CSS for section section:header */
+.site-header {
+    position: relative;
+    background-color: var(--header-bg);
+}
+
+.header-container {
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 56px;
+    padding: 0 18px;
+    background-color: transparent;
+}
+
+.header-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+}
+
+.header-bg-overlay {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.logo {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--color-text-light);
+}
+
+.main-nav {
+    display: flex;
+    gap: 13px;
+}
+
+.nav-link {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 5px 17px;
+    background-color: var(--nav-button-bg);
+    color: var(--color-text-dark);
+    font-size: 12px;
+    font-weight: 400;
+    white-space: nowrap;
+}
+
+@media (max-width: 768px) {
+    .header-container {
+        flex-direction: column;
+        height: auto;
+        padding: 15px;
+        gap: 15px;
+    }
+    .main-nav {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 10px;
+    }
+}
+
+/* CSS for section section:home */
+.home-section {
+    background: linear-gradient(225deg, #070b34 0%, #141852 28.21%, #2b2f77 61.7%, #5a3f7d 84.69%, #6b4984 114.56%, #855988 141.42%);
+}
+
+.home-container {
+    position: relative;
+    padding: 58px 46px 84px;
+    background-color: transparent;
+    min-height: 979px;
+}
+
+.profile-content {
+    position: relative;
+    z-index: 2;
+    max-width: 424px;
+}
+
+.profile-header {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 24px;
+}
+
+.avatar {
+    width: 55px;
+    height: 55px;
+    flex-shrink: 0;
+}
+
+.profile-name {
+    font-size: 15px;
+    font-weight: 400;
+    color: var(--color-text-light);
+    margin: 0;
+}
+
+.profile-description {
+    font-size: 12px;
+    font-weight: 400;
+    color: var(--color-text-light);
+    line-height: 1.5;
+    margin: 0;
+}
+
+.plans-content {
+    position: absolute;
+    top: 278px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 941px;
+    max-width: calc(100% - 40px);
+    height: 617px;
+    background-color: var(--plans-bg);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    z-index: 1;
+}
+
+.plans-text {
+    font-size: 20px;
+    font-weight: 400;
+    color: var(--color-text-offwhite);
+    text-align: center;
+    line-height: 1.5;
+    margin: 0;
+    max-width: 570px;
+}
+
+.moon-decoration {
+    position: absolute;
+    top: 51px;
+    right: 58px;
+    width: 205px;
+    height: 203.31px;
+    z-index: 0;
+}
+
+@media (max-width: 1049px) {
+    .home-container {
+        padding: 40px 20px;
+        min-height: 0;
+        display: flex;
+        flex-direction: column;
+        gap: 36px;
+    }
+    .plans-content {
+        position: static;
+        transform: none;
+        height: auto;
+        min-height: 400px;
+        margin-top: 150px;
+    }
+    .moon-decoration {
+        right: 20px;
+    }
+}
+
+@media (max-width: 768px) {
+    .profile-header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    .plans-content {
+        margin-top: 40px;
+    }
+    .plans-text {
+        font-size: 18px;
+    }
+    .moon-decoration {
+        opacity: 0.3;
+        top: 20px;
+    }
+}
+  </style>
+  <script src="home.js" defer></script>
+</head>
+<body>
+<header class="site-header">
+    <div class="page-container header-container">
+        <!-- merged image -->
+        <!-- <div class="header-background">
+            <img src="images/2_2.svg" alt="" class="header-bg-overlay">
+        </div> -->
+        <a href="#" class="logo">BlackCatOfficial</a>
+        <nav class="main-nav">
+            <a href="javascript:void(0)" class="nav-link">Home</a>
+            <a href="https://linktr.ee/BlackCatOfficialytb" class="nav-link">Linktree</a>
+            <a href="https://hidelink.blackcatofficial.qzz.io/" class="nav-link">Hidelink</a>
+            <a href="javascript:void(0)" class="nav-link">Coming Soon!</a>
+        </nav>
+    </div>
+</header>
+<main id="home" class="home-section">
+    <div class="page-container home-container">
+        <div class="profile-content">
+            <div class="profile-header">
+                <img src="images/837434b2f53b712134f8b356b60da987bd468dbc.png" alt="BlackCatOfficial avatar" class="avatar">
+                <h1 class="profile-name">BlackCatOfficial...?</h1>
+            </div>
+            <p class="profile-description">
+                I’m a independent developer working on Python, C++ and Lua.<br>
+                Also I’m working to become a vtuber asap.<br>
+                Loving Night Sky....<br>
+                Gender: ♂
+            </p>
+        </div>
+
+        <div class="plans-content">
+            <p class="plans-text">
+                Soon I will add More!<br>
+                Currently I don’t have anything here<br>
+                Plans:<br>
+                Make a discord server<br>
+                Become a new Pre-debut YTB<br>
+                Have a VPS<br>
+                Become an official mirror repository<br>
+                Become Slackware + Arch Linux + Debian + Ubuntu mirror
+            </p>
+        </div>
+        
+        <img src="images/10_7.svg" alt="Decorative moon illustration" class="moon-decoration">
+    </div>
+</main>
+</body>
+</html>
