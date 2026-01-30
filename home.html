@@ -206,65 +206,61 @@
   border-bottom:1px solid #ffeeba;padding:10px 16px;display:flex;align-items:center;justify-content:space-between;font-family:system-ui,Arial,sans-serif;">
   <div style="flex:1;min-width:0;">
     <strong style="margin-right:8px;">Notice:</strong>
-    This site has moved to <a href="https://blackcatofficial.qzz.io" style="color:#0b5fff;text-decoration:underline;">blackcatofficial.qzz.io</a>.
-    You will be redirected in <span id="redirect-countdown">10</span>s.
+    This domain is an alternative/alias to the main site at
+    <a href="https://blackcatofficial.qzz.io" style="color:#0b5fff;text-decoration:underline;" id="main-site-link">blackcatofficial.qzz.io</a>.
+    This page will not automatically redirect you — use the link above to visit the main site if you wish.
   </div>
   <div style="margin-left:12px;display:flex;gap:8px;align-items:center;">
-    <a id="redirect-now" href="https://blackcatofficial.qzz.io" style="background:#0b5fff;color:#fff;padding:6px 10px;border-radius:4px;text-decoration:none;">Go now</a>
-    <button id="dismiss-redirect" style="background:transparent;border:1px solid #856404;color:#856404;padding:6px 10px;border-radius:4px;cursor:pointer;">Stay</button>
+    <a id="open-main" href="https://blackcatofficial.qzz.io" style="background:#0b5fff;color:#fff;padding:6px 10px;border-radius:4px;text-decoration:none;">Open main site</a>
+    <button id="dismiss-redirect" style="background:transparent;border:1px solid #856404;color:#856404;padding:6px 10px;border-radius:4px;cursor:pointer;">Dismiss</button>
   </div>
 </div>
 
 <script>
 (function(){
   var target = "https://blackcatofficial.qzz.io";
-  // If already on the target host, do nothing
-  if (location.hostname === (new URL(target)).hostname) {
-    var b = document.getElementById('domain-redirect-banner');
-    if (b) b.style.display = 'none';
-    return;
-  }
-
-  var countdownEl = document.getElementById('redirect-countdown');
-  var dismissBtn = document.getElementById('dismiss-redirect');
-  var redirectNow = document.getElementById('redirect-now');
   var banner = document.getElementById('domain-redirect-banner');
-  var seconds = 10;
 
-  // Safe: update countdown UI
-  function updateUI() {
-    if (countdownEl) countdownEl.textContent = seconds;
+  // If already on the target host, hide the banner
+  try {
+    if (location.hostname === (new URL(target)).hostname) {
+      if (banner) banner.style.display = 'none';
+      return;
+    }
+  } catch (e) {
+    // If URL parsing fails for any reason, keep showing banner (no redirect behavior)
   }
 
-  updateUI();
-  var interval = setInterval(function(){
-    seconds -= 1;
-    updateUI();
-    if (seconds <= 0) {
-      clearInterval(interval);
-      // Preserve path/query/hash while sending to main domain
-      var dest = target + location.pathname + location.search + location.hash;
-      location.replace(dest);
-    }
-  }, 1000);
+  // Do NOT perform any automatic redirects.
+  // Just provide the user a link to the main site and a dismiss action.
 
-  // Dismiss button: stop redirect and hide banner
+  var dismissBtn = document.getElementById('dismiss-redirect');
+  var openMain = document.getElementById('open-main');
+  var mainSiteLink = document.getElementById('main-site-link');
+
+  // Clicking 'Open main site' navigates via the anchor (no script-based replace).
+  if (openMain) {
+    // No automatic behavior required; keep default anchor behavior.
+    openMain.addEventListener('click', function(){
+      // Intentionally empty: we do not auto-redirect, only let the user follow the link.
+    });
+  }
+
+  // Dismiss button: hide banner and restore page spacing
   if (dismissBtn) dismissBtn.addEventListener('click', function(){
-    clearInterval(interval);
     if (banner) banner.style.display = 'none';
+    // restore document padding (if any was applied below)
+    var prevPaddingTop = document.documentElement.style.paddingTop || '';
+    document.documentElement.style.paddingTop = prevPaddingTop;
   });
 
-  // If user clicks "Go now", allow navigation (link present)
-  if (redirectNow) redirectNow.addEventListener('click', function(){
-    clearInterval(interval);
-  });
-
-  // Accessibility: add a small top offset to body content so banner doesn't overlap
+  // Accessibility: add a small top offset to page so banner doesn't overlap content
   var bannerHeight = banner ? banner.offsetHeight : 0;
   if (bannerHeight) {
+    // Save previous inline padding-top so we can restore on dismiss
     var prevPaddingTop = document.documentElement.style.paddingTop || '';
     document.documentElement.style.paddingTop = bannerHeight + 'px';
-    // restore on dismiss
+
     if (dismissBtn) dismissBtn.addEventListener('click', function(){
       document.documentElement.style.paddingTop = prevPaddingTop;
     });
